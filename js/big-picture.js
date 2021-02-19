@@ -1,4 +1,4 @@
-import {isEscEvent} from './utils.js'
+import {isEscEvent} from './utils.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('img');
@@ -69,4 +69,4 @@ document.addEventListener('keydown', function(evt) {
   }
 });
 
-export {showBigPicture};
+export {showBigPicture, hideModal};
