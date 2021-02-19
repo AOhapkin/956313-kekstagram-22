@@ -4,7 +4,7 @@ import {isEscEvent} from './utils.js'
 const uploadInput = document.querySelector('#upload-file');
 const editor = document.querySelector('.img-upload__overlay');
 const closeButton = editor.querySelector('.img-upload__cancel');
-const imagePreview = editor.querySelector('.img-upload__preview img');
+const imagePreview = editor.querySelector('.img-upload__preview');
 const scalelUpButton = editor.querySelector('.scale__control--bigger');
 const scaleDownButton = editor.querySelector('.scale__control--smaller');
 const scaleInput = editor.querySelector('.scale__control--value');
