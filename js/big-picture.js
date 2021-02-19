@@ -53,19 +53,19 @@ function showBigPicture (pictureData) {
   renderBigPictureData(pictureData);
 }
 
-function hideBigPicture () {
-  bigPicture.classList.add('hidden');
+function hideModal (modal) {
+  modal.classList.add('hidden');
   body.classList.remove('modal-open');
 }
 
 closeButton.addEventListener('click', function() {
-  hideBigPicture();
+  hideModal(bigPicture);
 });
 
 document.addEventListener('keydown', function(evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
-    hideBigPicture();
+    hideModal(bigPicture);
   }
 });
 
