@@ -13,26 +13,43 @@ const effectsData = {
     id: 'effect-chrome',
     class: 'effects__preview--chrome',
     filter: 'grayscale',
+    min: 0,
+    max: 1,
+    step: 0.1,
   },
   sepia: {
     id: 'effect-sepia',
     class: 'effects__preview--sepia',
     filter: 'sepia',
+    min: 0,
+    max: 1,
+    step: 0.1,
   },
   marvin: {
     id: 'effect-marvin',
     class: 'effects__preview--marvin',
-    filter: 'marvin',
+    filter: 'invert',
+    min: 0,
+    max: 100,
+    step: 1,
+    units: '%',
   },
   phobos: {
     id: 'effect-phobos',
     class: 'effects__preview--phobos',
-    filter: 'phobos',
+    filter: 'blur',
+    min: 0,
+    max: 3,
+    step: 0.1,
+    units: 'px',
   },
   heat: {
     id: 'effect-heat',
     class: 'effects__preview--heat',
-    filter: 'heat',
+    filter: 'brightness',
+    min: 1,
+    max: 3,
+    step: 0.1,
   },
 }
 
@@ -47,17 +64,34 @@ function setSlider () {
     start: 100,
     step: 1,
     connect: 'lower',
+    format: {
+      to: function (value) {
+        if (Number.isInteger(value)) {
+          return value.toFixed(0);
+        }
+        return value.toFixed(1);
+      },
+      from: function (value) {
+        return parseFloat(value);
+      },
+    },
   });
   sliderBlock.classList.add('hidden');
+  effectsList.addEventListener('change', setEffect);
 }
-
-setSlider();
 
 function removeSlider () {
   slider.noUiSlider.destroy();
   previewImage.style.filter = effectsData.none.filter;
   previewImage.className = 'img-upload__preview';
   effectLevelInput.value = '';
+}
+
+function setSliderValue (filter, units) {
+  slider.noUiSlider.on('update', (values, handle) => {
+    effectLevelInput.value = values[handle];
+    previewImage.style.filter = `${filter}(${effectLevelInput.value}${units})`;
+  })
 }
 
 function setEffect (evt) {
@@ -78,6 +112,15 @@ function setEffect (evt) {
 
     case effectsData.chrome.id:
       previewImage.classList.add(effectsData.chrome.class);
+      slider.noUiSlider.updateOptions({
+        range: {
+          min: effectsData.chrome.min,
+          max: effectsData.chrome.max,
+        },
+        start: effectsData.chrome.max,
+        step: effectsData.chrome.step,
+      });
+      setSliderValue(effectsData.chrome.filter, effectsData.chrome.step);
       break;
 
     case effectsData.sepia.id:
@@ -97,7 +140,5 @@ function setEffect (evt) {
       break;
   }
 }
-
-effectsList.addEventListener('change', setEffect);
 
 export {setSlider, removeSlider}
