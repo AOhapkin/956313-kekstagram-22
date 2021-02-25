@@ -1,5 +1,5 @@
 const uploadForm = document.querySelector('.img-upload__form');
-const previewImage = uploadForm.querySelector('.img-upload__preview img');
+const previewImage = uploadForm.querySelector('.img-upload__preview');
 const effectsList = uploadForm.querySelector('.effects__list');
 const effectsData = {
   none: {
@@ -52,7 +52,7 @@ function setEffect (evt) {
     case effectsData.heat.id:
       previewImage.classList.add(effectsData.heat.class);
       break;
-  
+
   }
 }
 
