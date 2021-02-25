@@ -1,4 +1,4 @@
-import {hideModal} from './big-picture.js'
+import {hideModal, body} from './big-picture.js'
 import {isEscEvent} from './utils.js'
 
 const uploadInput = document.querySelector('#upload-file');
@@ -12,12 +12,14 @@ const scaleDefault = 100;
 const scaleStep = 25;
 let scale = scaleDefault;
 
-// ВРЕМЕННО
+// Временно
 editor.classList.remove('hidden');
+body.classList.add('modal-open');
 
 uploadInput.addEventListener('change', function(evt) {
   evt.preventDefault();
   editor.classList.remove('hidden');
+  body.classList.add('modal-open');
 });
 
 closeButton.addEventListener('click', function() {

@@ -69,4 +69,4 @@ document.addEventListener('keydown', function(evt) {
   }
 });
 
-export {showBigPicture, hideModal};
+export {showBigPicture, hideModal, body};
