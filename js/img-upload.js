@@ -1,5 +1,6 @@
-import {hideModal, body} from './big-picture.js'
-import {isEscEvent} from './utils.js'
+import {hideModal, body} from './big-picture.js';
+import {isEscEvent} from './utils.js';
+import {setSlider, removeSlider} from './image-effects.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const editor = document.querySelector('.img-upload__overlay');
@@ -16,14 +17,20 @@ let scale = scaleDefault;
 editor.classList.remove('hidden');
 body.classList.add('modal-open');
 
-uploadInput.addEventListener('change', function(evt) {
-  evt.preventDefault();
+function openImageEditor () {
   editor.classList.remove('hidden');
   body.classList.add('modal-open');
+  setSlider();
+}
+
+uploadInput.addEventListener('change', function(evt) {
+  evt.preventDefault();
+  openImageEditor();
 });
 
 closeButton.addEventListener('click', function() {
   hideModal(editor);
+  removeSlider();
 });
 
 document.addEventListener('keydown', function(evt) {
