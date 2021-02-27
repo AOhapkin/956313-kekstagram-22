@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Алексей Охапкин](https://up.htmlacademy.ru/javascript/22/user/956313).
-* Наставник: [Анастасия Шишова](https://htmlacademy.ru/profile/anashi).
+* Наставник: [Мария Наг](https://htmlacademy.ru/profile/id47061).
 
 ---
 
