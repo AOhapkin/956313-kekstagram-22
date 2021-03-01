@@ -3,7 +3,7 @@ import {isEscEvent} from './utils.js';
 const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('img');
 const imageDescription = bigPicture.querySelector('.social__caption');
-const commentCount = bigPicture.querySelector('.social__comment-count');
+const commentCountBlock = bigPicture.querySelector('.social__comment-count');
 const commentCountElement = bigPicture.querySelector('.comments-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const likesCount = bigPicture.querySelector('.likes-count');
@@ -48,25 +48,33 @@ function renderBigPictureData (pictureData) {
 function showBigPicture (pictureData) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
-  commentCount.classList.add('hidden');
+  commentCountBlock.classList.add('hidden');
   commentsLoader.classList.add('hidden');
   renderBigPictureData(pictureData);
+
+  document.addEventListener('keydown', function(evt) {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      hideModal(bigPicture);
+    }
+  });
 }
 
 function hideModal (modal) {
   modal.classList.add('hidden');
   body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onBigPictureEscKeydown(modal));
 }
 
-closeButton.addEventListener('click', function() {
-  hideModal(bigPicture);
-});
-
-document.addEventListener('keydown', function(evt) {
+function onBigPictureEscKeydown (evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     hideModal(bigPicture);
   }
+}
+
+closeButton.addEventListener('click', function() {
+  hideModal(bigPicture);
 });
 
 export {showBigPicture, hideModal, body};
