@@ -13,9 +13,6 @@ const scaleDefault = 100;
 const scaleStep = 25;
 let scale = scaleDefault;
 
-// Временно
-openImageEditor();
-
 function openImageEditor () {
   editor.classList.remove('hidden');
   body.classList.add('modal-open');
