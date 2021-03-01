@@ -30,15 +30,23 @@ const DESCRIPTIONS = [
 ];
 
 const PHOTOS_COUNT = 25;
+const MIN_AVATAR_ID = 1;
+const MAX_AVATAR_ID = 6;
+const MIN_COMMENT_COUNT = 0;
+const MAX_COMMENT_COUNT = 0;
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
+
+
 
 function generateComments () {
-  const COMMENT_COUNT = getRandomFromRange(1, 5);
+  let commentCount = getRandomFromRange(MIN_COMMENT_COUNT, MAX_COMMENT_COUNT);
   let comments = [];
 
-  for (let i = 1; i <= COMMENT_COUNT; i++) {
+  for (let i = 0; i <= commentCount; i++) {
     comments.push({
-      id: i,
-      avatar: 'img/avatar-' + getRandomFromRange(1, 6) + '.svg',
+      id: i + 1,
+      avatar: 'img/avatar-' + getRandomFromRange(MIN_AVATAR_ID, MAX_AVATAR_ID) + '.svg',
       message: getRandomArrayElement(MESSAGES),
       name: getRandomArrayElement(NAMES),
     });
@@ -50,12 +58,12 @@ function generateComments () {
 function generatePhotos () {
   let photos = [];
 
-  for (let i = 1; i <= PHOTOS_COUNT; i++) {
+  for (let i = 0; i <= PHOTOS_COUNT; i++) {
     photos.push({
-      id: i,
-      url: 'photos/' + i + '.jpg',
+      id: i + 1,
+      url: 'photos/' + getRandomFromRange(1, PHOTOS_COUNT) + '.jpg',
       description: getRandomArrayElement(DESCRIPTIONS),
-      likes: getRandomFromRange(15, 200),
+      likes: getRandomFromRange(MIN_LIKES, MAX_LIKES),
       comments: generateComments(),
     })
   }
