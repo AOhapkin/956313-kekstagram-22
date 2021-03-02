@@ -33,19 +33,19 @@ const PHOTOS_COUNT = 25;
 const MIN_AVATAR_ID = 1;
 const MAX_AVATAR_ID = 6;
 const MIN_COMMENT_COUNT = 0;
-const MAX_COMMENT_COUNT = 0;
+const MAX_COMMENT_COUNT = 5;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
 
 
 function generateComments () {
-  let commentCount = getRandomFromRange(MIN_COMMENT_COUNT, MAX_COMMENT_COUNT);
+  const commentCount = getRandomFromRange(MIN_COMMENT_COUNT, MAX_COMMENT_COUNT);
   let comments = [];
 
-  for (let i = 0; i <= commentCount; i++) {
+  for (let i = 0; i < commentCount; i++) {
     comments.push({
-      id: i + 1,
+      id: i,
       avatar: 'img/avatar-' + getRandomFromRange(MIN_AVATAR_ID, MAX_AVATAR_ID) + '.svg',
       message: getRandomArrayElement(MESSAGES),
       name: getRandomArrayElement(NAMES),
@@ -60,7 +60,7 @@ function generatePhotos () {
 
   for (let i = 0; i <= PHOTOS_COUNT; i++) {
     photos.push({
-      id: i + 1,
+      id: i,
       url: 'photos/' + getRandomFromRange(1, PHOTOS_COUNT) + '.jpg',
       description: getRandomArrayElement(DESCRIPTIONS),
       likes: getRandomFromRange(MIN_LIKES, MAX_LIKES),

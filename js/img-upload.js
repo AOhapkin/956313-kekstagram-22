@@ -19,37 +19,47 @@ function openImageEditor () {
   setSlider();
 }
 
-uploadInput.addEventListener('change', function(evt) {
+uploadInput.addEventListener('change', onUploadInputChange);
+
+function onUploadInputChange (evt) {
   evt.preventDefault();
   openImageEditor();
-});
+}
 
-closeButton.addEventListener('click', function() {
+closeButton.addEventListener('click', onCloseButtonClick);
+
+function onCloseButtonClick () {
   hideModal(editor);
   removeSlider();
-});
+}
 
-document.addEventListener('keydown', function(evt) {
+document.addEventListener('keydown', onDocumentKeydown);
+
+function onDocumentKeydown (evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     hideModal(editor);
   }
-});
+}
 
 scaleInput.value = scale + '%';
 
-scalelUpButton.addEventListener('click', function() {
+scalelUpButton.addEventListener('click', onScaleUpClick);
+
+function onScaleUpClick () {
   if (scale < 100) {
     scale += scaleStep;
     scaleInput.value = scale + '%';
     imagePreview.style.transform = 'scale(' + scale/100 + ')';
   }
-});
+}
 
-scaleDownButton.addEventListener('click', function() {
+scaleDownButton.addEventListener('click', onScaleDownClick);
+
+function onScaleDownClick () {
   if (scale > 25) {
     scale -= scaleStep;
     scaleInput.value = scale + '%';
     imagePreview.style.transform = 'scale(' + scale/100 + ')';
   }
-});
+}

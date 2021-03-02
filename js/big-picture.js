@@ -4,11 +4,11 @@ const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('img');
 const imageDescription = bigPicture.querySelector('.social__caption');
 const commentCountBlock = bigPicture.querySelector('.social__comment-count');
-const commentCountElement = bigPicture.querySelector('.comments-count');
+const commentCountSpan = bigPicture.querySelector('.comments-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
 const likesCount = bigPicture.querySelector('.likes-count');
 const body = document.querySelector('body');
-let commentsList = bigPicture.querySelector('.social__comments');
+const commentsList = bigPicture.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment')
   .content
   .querySelector('.social__comment');
@@ -41,7 +41,7 @@ function renderBigPictureData (pictureData) {
   image.src = pictureData.url;
   likesCount.textContent = pictureData.likes;
   imageDescription.textContent = pictureData.description;
-  commentCountElement.textContent = pictureData.comments.length;
+  commentCountSpan.textContent = pictureData.comments.length;
   createComments(pictureData.comments);
 }
 
@@ -52,29 +52,26 @@ function showBigPicture (pictureData) {
   commentsLoader.classList.add('hidden');
   renderBigPictureData(pictureData);
 
-  document.addEventListener('keydown', function(evt) {
-    if (isEscEvent(evt)) {
-      evt.preventDefault();
-      hideModal(bigPicture);
-    }
-  });
+  document.addEventListener('keydown', onDocumentKeydown);
 }
 
-function hideModal (modal) {
-  modal.classList.add('hidden');
-  body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onBigPictureEscKeydown(modal));
-}
-
-function onBigPictureEscKeydown (evt) {
+function onDocumentKeydown (evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     hideModal(bigPicture);
   }
 }
 
-closeButton.addEventListener('click', function() {
+function hideModal (modal) {
+  modal.classList.add('hidden');
+  body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
+
+closeButton.addEventListener('click', onCloseButtonClick);
+
+function onCloseButtonClick () {
   hideModal(bigPicture);
-});
+}
 
 export {showBigPicture, hideModal, body};
