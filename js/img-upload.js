@@ -1,4 +1,4 @@
-import {hideModal, body} from './big-picture.js';
+import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
 import {setSlider, removeSlider} from './image-effects.js';
 
@@ -13,34 +13,40 @@ const scaleDefault = 100;
 const scaleStep = 25;
 let scale = scaleDefault;
 
-function openImageEditor () {
+function showImageEditor () {
   editor.classList.remove('hidden');
   body.classList.add('modal-open');
+  closeButton.addEventListener('click', onCloseButtonClick);
+  document.addEventListener('keydown', onDocumentKeydown);
   setSlider();
+}
+
+function hideImageEditor () {
+  editor.classList.add('hidden');
+  body.classList.remove('modal-open');
+  closeButton.removeEventListener('click', onCloseButtonClick);
+  document.removeEventListener('keydown', onDocumentKeydown);
+}
+
+function onCloseButtonClick () {
+  hideImageEditor();
+  removeSlider();
 }
 
 uploadInput.addEventListener('change', onUploadInputChange);
 
 function onUploadInputChange (evt) {
   evt.preventDefault();
-  openImageEditor();
+  showImageEditor();
 }
-
-closeButton.addEventListener('click', onCloseButtonClick);
-
-function onCloseButtonClick () {
-  hideModal(editor);
-  removeSlider();
-}
-
-document.addEventListener('keydown', onDocumentKeydown);
 
 function onDocumentKeydown (evt) {
   if (isEscEvent(evt)) {
-    evt.preventDefault();
-    hideModal(editor);
+    hideImageEditor();
   }
 }
+
+// Масштабирование изображения
 
 scaleInput.value = scale + '%';
 

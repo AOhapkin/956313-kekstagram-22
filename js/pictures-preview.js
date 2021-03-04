@@ -6,12 +6,12 @@ const pictureTemplate =document.querySelector('#picture')
   .querySelector('.picture');
 
 function createPictureElement (element) {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = element.url;
-  pictureElement.querySelector('.picture__comments').textContent = element.comments.length;
-  pictureElement.querySelector('.picture__likes').textContent = element.likes;
-  pictureElement.addEventListener('click', onPictureElementClick);
-  return pictureElement;
+  const picture = pictureTemplate.cloneNode(true);
+  picture.querySelector('.picture__img').src = element.url;
+  picture.querySelector('.picture__comments').textContent = element.comments.length;
+  picture.querySelector('.picture__likes').textContent = element.likes;
+  picture.addEventListener('click', onPictureElementClick);
+  return picture;
 }
 
 function onPictureElementClick () {
