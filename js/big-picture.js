@@ -57,7 +57,6 @@ function showBigPicture (pictureData) {
 
 function onDocumentKeydown (evt) {
   if (isEscEvent(evt)) {
-    evt.preventDefault();
     hideModal(bigPicture);
   }
 }
