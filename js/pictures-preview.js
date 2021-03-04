@@ -10,11 +10,11 @@ function createPictureElement (elementData) {
   pictureElement.querySelector('.picture__img').src = elementData.url;
   pictureElement.querySelector('.picture__comments').textContent = elementData.comments.length;
   pictureElement.querySelector('.picture__likes').textContent = elementData.likes;
-  pictureElement.addEventListener('click', onPictureClick);
+  pictureElement.addEventListener('click', onPictureElementClick);
   return pictureElement;
 }
 
-function onPictureClick () {
+function onPictureElementClick () {
   showBigPicture(this.elementData);
 }
 
