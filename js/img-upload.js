@@ -33,8 +33,6 @@ function onCloseButtonClick () {
   removeSlider();
 }
 
-uploadInput.addEventListener('change', onUploadInputChange);
-
 function onUploadInputChange (evt) {
   evt.preventDefault();
   showImageEditor();
@@ -45,6 +43,8 @@ function onDocumentKeydown (evt) {
     hideImageEditor();
   }
 }
+
+uploadInput.addEventListener('change', onUploadInputChange);
 
 // Масштабирование изображения
 

@@ -4,3 +4,5 @@ import './img-upload.js';
 
 const data = generatePhotos();
 createPictures(data);
+
+export {data};

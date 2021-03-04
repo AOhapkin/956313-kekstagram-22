@@ -37,7 +37,7 @@ function createComments (comments) {
   commentsList.appendChild(fragment);
 }
 
-function renderBigPictureData (picture) {
+function renderBigPicture (picture) {
   image.src = picture.url;
   likesCount.textContent = picture.likes;
   imageDescription.textContent = picture.description;
@@ -50,7 +50,7 @@ function showBigPicture (picture) {
   body.classList.add('modal-open');
   commentCountBlock.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  renderBigPictureData(picture);
+  renderBigPicture(picture);
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }
