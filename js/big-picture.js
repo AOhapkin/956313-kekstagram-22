@@ -45,32 +45,33 @@ function renderBigPictureData (pictureData) {
   createComments(pictureData.comments);
 }
 
-function showBigPicture (pictureData) {
+function showBigPicture (picture) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentCountBlock.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  renderBigPictureData(pictureData);
-
+  renderBigPictureData(picture);
+  closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
 function onDocumentKeydown (evt) {
   if (isEscEvent(evt)) {
-    hideModal(bigPicture);
+    hideBigPicture();
   }
 }
 
-function hideModal (modal) {
-  modal.classList.add('hidden');
+function hideBigPicture () {
+  bigPicture.classList.add('hidden');
   body.classList.remove('modal-open');
+  commentCountBlock.classList.remove('hidden');
+  commentsLoader.classList.remove('hidden');
   document.removeEventListener('keydown', onDocumentKeydown);
+  closeButton.removeEventListener('click', onCloseButtonClick);
 }
-
-closeButton.addEventListener('click', onCloseButtonClick);
 
 function onCloseButtonClick () {
-  hideModal(bigPicture);
+  hideBigPicture();
 }
 
-export {showBigPicture, hideModal, body};
+export {showBigPicture, body};
