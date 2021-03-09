@@ -1,5 +1,5 @@
 import {showBigPicture} from './big-picture.js';
-import {data} from './main.js';
+import {data} from './random-data.js';
 
 const picturesSection = document.querySelector('.pictures');
 const pictureTemplate =document.querySelector('#picture')

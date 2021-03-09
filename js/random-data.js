@@ -71,4 +71,6 @@ function generatePhotos () {
   return photos;
 }
 
-export {generatePhotos};
+const data = generatePhotos();
+
+export {data};
