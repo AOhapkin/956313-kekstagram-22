@@ -1,6 +1,6 @@
 import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
-import {setSlider, removeSlider} from './image-effects.js';
+import {setSlider, removeSlider} from './editor.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const editor = document.querySelector('.img-upload__overlay');

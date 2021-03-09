@@ -23,7 +23,9 @@ function createPictures (pictures) {
 }
 
 function onPictureElementClick (evt) {
-  showBigPicture(evt);
+  if (evt.target.classList.contains('picture__img')) {
+    showBigPicture(evt);
+  }
 }
 
 export {createPictures, picturesSection};
