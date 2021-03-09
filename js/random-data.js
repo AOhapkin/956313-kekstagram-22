@@ -37,8 +37,6 @@ const MAX_COMMENT_COUNT = 5;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
-
-
 function generateComments () {
   const commentCount = getRandomFromRange(MIN_COMMENT_COUNT, MAX_COMMENT_COUNT);
   let comments = [];

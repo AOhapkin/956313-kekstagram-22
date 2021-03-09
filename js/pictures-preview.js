@@ -1,5 +1,4 @@
-import {showBigPicture} from './big-picture.js';
-import {data} from './random-data.js';
+import {onPictureElementClick} from './big-picture.js';
 
 const picturesSection = document.querySelector('.pictures');
 const pictureTemplate =document.querySelector('#picture')
@@ -14,25 +13,6 @@ function createPictureElement (element) {
   return picture;
 }
 
-function onPictureElementClick (event) {
-  if (event.target.className != 'picture__img') {
-    return;
-  }
-
-  const child = event.target.parentNode;
-  const childs = picturesSection.querySelectorAll('.picture');
-  let childId;
-
-  for (let i = 0; i < childs.length; i++) {
-    if (child === childs[i]) {
-      childId = i;
-      break;
-    }
-  }
-
-  showBigPicture(data[childId]);
-}
-
 function createPictures (pictures) {
   const picturesSectionFragment = document.createDocumentFragment();
   pictures.forEach((picture) => {
@@ -42,4 +22,4 @@ function createPictures (pictures) {
   picturesSection.addEventListener('click', onPictureElementClick);
 }
 
-export {createPictures};
+export {createPictures, picturesSection};

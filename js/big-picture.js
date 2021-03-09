@@ -1,4 +1,6 @@
 import {isEscEvent} from './utils.js';
+import {picturesSection} from './pictures-preview.js';
+import {data} from './random-data.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('img');
@@ -55,6 +57,25 @@ function showBigPicture (picture) {
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
+function onPictureElementClick (evt) {
+  if (evt.target.className != 'picture__img') {
+    return;
+  }
+
+  const child = evt.target.parentNode;
+  const childs = picturesSection.querySelectorAll('.picture');
+  let childId;
+
+  for (let i = 0; i < childs.length; i++) {
+    if (child === childs[i]) {
+      childId = i;
+      break;
+    }
+  }
+
+  showBigPicture(data[childId]);
+}
+
 function onDocumentKeydown (evt) {
   if (isEscEvent(evt)) {
     hideBigPicture();
@@ -74,4 +95,4 @@ function onCloseButtonClick () {
   hideBigPicture();
 }
 
-export {showBigPicture, body};
+export {onPictureElementClick, body};
