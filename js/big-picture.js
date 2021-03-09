@@ -49,17 +49,18 @@ function renderBigPicture (picture) {
   }
 }
 
-function showBigPicture (picture) {
+function showBigPicture (evt) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentCountBlock.classList.add('hidden');
   commentsLoader.classList.add('hidden');
+  let picture = findBigPicture(evt);
   renderBigPicture(picture);
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
-function onPictureElementClick (evt) {
+function findBigPicture (evt) {
   if (evt.target.className != 'picture__img') {
     return;
   }
@@ -75,7 +76,7 @@ function onPictureElementClick (evt) {
     }
   }
 
-  showBigPicture(data[childId]);
+  return data[childId];
 }
 
 function onDocumentKeydown (evt) {
@@ -97,4 +98,4 @@ function onCloseButtonClick () {
   hideBigPicture();
 }
 
-export {onPictureElementClick, body};
+export {showBigPicture, body};

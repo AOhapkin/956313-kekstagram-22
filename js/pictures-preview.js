@@ -1,4 +1,4 @@
-import {onPictureElementClick} from './big-picture.js';
+import {showBigPicture} from './big-picture.js';
 
 const picturesSection = document.querySelector('.pictures');
 const pictureTemplate =document.querySelector('#picture')
@@ -20,6 +20,10 @@ function createPictures (pictures) {
   });
   picturesSection.appendChild(picturesSectionFragment);
   picturesSection.addEventListener('click', onPictureElementClick);
+}
+
+function onPictureElementClick (evt) {
+  showBigPicture(evt);
 }
 
 export {createPictures, picturesSection};
