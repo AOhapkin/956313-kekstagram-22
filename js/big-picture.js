@@ -44,7 +44,9 @@ function renderBigPicture (picture) {
   likesCount.textContent = picture.likes;
   imageDescription.textContent = picture.description;
   commentCountSpan.textContent = picture.comments.length;
-  createComments(picture.comments);
+  if (picture.comments.length > 0) {
+    createComments(picture.comments);
+  }
 }
 
 function showBigPicture (picture) {
