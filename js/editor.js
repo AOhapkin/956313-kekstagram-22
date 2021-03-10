@@ -1,56 +1,41 @@
+import {effectsData} from './effects-data.js'
+
+const editor = document.querySelector('.img-upload__overlay');
+const scalelUpButton = editor.querySelector('.scale__control--bigger');
+const scaleDownButton = editor.querySelector('.scale__control--smaller');
+const scaleInput = editor.querySelector('.scale__control--value');
+const scaleDefault = 100;
+const scaleStep = 25;
+let scale = scaleDefault;
 const uploadForm = document.querySelector('.img-upload__form');
-const previewImage = uploadForm.querySelector('.img-upload__preview');
+const preview = uploadForm.querySelector('.img-upload__preview');
 const effectsList = uploadForm.querySelector('.effects__list');
 const sliderBlock = uploadForm.querySelector('.img-upload__effect-level');
 const effectLevelInput = uploadForm.querySelector('.effect-level__value');
 const slider = uploadForm.querySelector('.effect-level__slider');
-const effectsData = {
-  none: {
-    id: 'effect-none',
-    filter: '',
-  },
-  chrome: {
-    id: 'effect-chrome',
-    class: 'effects__preview--chrome',
-    filter: 'grayscale',
-    min: 0,
-    max: 1,
-    step: 0.1,
-  },
-  sepia: {
-    id: 'effect-sepia',
-    class: 'effects__preview--sepia',
-    filter: 'sepia',
-    min: 0,
-    max: 1,
-    step: 0.1,
-  },
-  marvin: {
-    id: 'effect-marvin',
-    class: 'effects__preview--marvin',
-    filter: 'invert',
-    min: 0,
-    max: 100,
-    step: 1,
-    units: '%',
-  },
-  phobos: {
-    id: 'effect-phobos',
-    class: 'effects__preview--phobos',
-    filter: 'blur',
-    min: 0,
-    max: 3,
-    step: 0.1,
-    units: 'px',
-  },
-  heat: {
-    id: 'effect-heat',
-    class: 'effects__preview--heat',
-    filter: 'brightness',
-    min: 1,
-    max: 3,
-    step: 0.1,
-  },
+
+// Масштабирование
+
+scaleInput.value = scale + '%';
+
+scalelUpButton.addEventListener('click', onScaleUpClick);
+
+function onScaleUpClick () {
+  if (scale < 100) {
+    scale += scaleStep;
+    scaleInput.value = scale + '%';
+    preview.style.transform = 'scale(' + scale/100 + ')';
+  }
+}
+
+scaleDownButton.addEventListener('click', onScaleDownClick);
+
+function onScaleDownClick () {
+  if (scale > 25) {
+    scale -= scaleStep;
+    scaleInput.value = scale + '%';
+    preview.style.transform = 'scale(' + scale/100 + ')';
+  }
 }
 
 /* global noUiSlider:readonly */
@@ -82,15 +67,15 @@ function setSlider () {
 
 function removeSlider () {
   slider.noUiSlider.destroy();
-  previewImage.style.filter = effectsData.none.filter;
-  previewImage.className = 'img-upload__preview';
+  preview.style.filter = effectsData.none.filter;
+  preview.className = 'img-upload__preview';
   effectLevelInput.value = '';
 }
 
 function setSliderValue (filter, units) {
   slider.noUiSlider.on('update', (values, handle) => {
     effectLevelInput.value = values[handle];
-    previewImage.style.filter = `${filter}(${effectLevelInput.value}${units})`;
+    preview.style.filter = `${filter}(${effectLevelInput.value}${units})`;
   })
 }
 
@@ -103,7 +88,7 @@ function setEffect (evt) {
   }
 
   // сброс классов
-  previewImage.className = 'img-upload__preview';
+  preview.className = 'img-upload__preview';
 
   switch (evt.target.id) {
     case effectsData.none.id:
@@ -111,7 +96,7 @@ function setEffect (evt) {
       break;
 
     case effectsData.chrome.id:
-      previewImage.classList.add(effectsData.chrome.class);
+      preview.classList.add(effectsData.chrome.class);
       slider.noUiSlider.updateOptions({
         range: {
           min: effectsData.chrome.min,
@@ -124,19 +109,19 @@ function setEffect (evt) {
       break;
 
     case effectsData.sepia.id:
-      previewImage.classList.add(effectsData.sepia.class);
+      preview.classList.add(effectsData.sepia.class);
       break;
 
     case effectsData.marvin.id:
-      previewImage.classList.add(effectsData.marvin.class);
+      preview.classList.add(effectsData.marvin.class);
       break;
 
     case effectsData.phobos.id:
-      previewImage.classList.add(effectsData.phobos.class);
+      preview.classList.add(effectsData.phobos.class);
       break;
 
     case effectsData.heat.id:
-      previewImage.classList.add(effectsData.heat.class);
+      preview.classList.add(effectsData.heat.class);
       break;
   }
 }
