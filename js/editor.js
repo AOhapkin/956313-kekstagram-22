@@ -79,17 +79,17 @@ function setSliderValue (filter, units) {
   })
 }
 
-function setEffect (evt) {
-  currentEffect = effectsData[evt.target.value];
+function setEffect (effect) {
+  currentEffect = effectsData[effect];
 
   preview.className = 'img-upload__preview';
-  preview.classList.add('effects__preview--' + evt.target.value);
+  preview.classList.add('effects__preview--' + effect);
 
   if (!currentEffect) {
     effectLevelInput.value = '';
     sliderBlock.classList.add('hidden');
   } else {
-    effectLevelInput.value = 100;
+    // effectLevelInput.value = 100;
     sliderBlock.classList.remove('hidden');
   }
 
@@ -141,6 +141,10 @@ function setEffect (evt) {
   // }
 }
 
-effectsList.addEventListener('change', setEffect);
+effectsList.addEventListener('change', onEffectsListChange);
+
+function onEffectsListChange (evt) {
+  setEffect(evt.target.value);
+}
 
 export {setSlider, removeSlider}
