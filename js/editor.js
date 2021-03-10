@@ -15,10 +15,7 @@ const effectLevelInput = uploadForm.querySelector('.effect-level__value');
 const slider = uploadForm.querySelector('.effect-level__slider');
 let currentEffect = '';
 
-// Масштабирование
-
 scaleInput.value = scale + '%';
-
 scalelUpButton.addEventListener('click', onScaleUpClick);
 
 function onScaleUpClick () {
@@ -79,72 +76,24 @@ function setSliderValue (filter, units) {
   })
 }
 
-function setEffect (effect) {
-  currentEffect = effectsData[effect];
+function setEffect (evt) {
+  currentEffect = effectsData[evt.target.value];
 
   preview.className = 'img-upload__preview';
-  preview.classList.add('effects__preview--' + effect);
+  preview.classList.add('effects__preview--' + evt.target.value);
 
   if (!currentEffect) {
     effectLevelInput.value = '';
     sliderBlock.classList.add('hidden');
   } else {
-    // effectLevelInput.value = 100;
     sliderBlock.classList.remove('hidden');
   }
-
-
-  // СТАРАЯ ВЕРСИЯ
-  // показать и скрыть слайдер
-  // if (evt.target.id === effectsData.none.id) {
-  //   sliderBlock.classList.add('hidden');
-  // } else {
-  //   sliderBlock.classList.remove('hidden');
-  // }
-
-  // // сброс классов
-  // preview.className = 'img-upload__preview';
-
-  // switch (evt.target.id) {
-  //   case effectsData.none.id:
-  //     effectLevelInput.value = '';
-  //     break;
-
-  //   case effectsData.chrome.id:
-  //     preview.classList.add(effectsData.chrome.class);
-  //     slider.noUiSlider.updateOptions({
-  //       range: {
-  //         min: effectsData.chrome.min,
-  //         max: effectsData.chrome.max,
-  //       },
-  //       start: effectsData.chrome.max,
-  //       step: effectsData.chrome.step,
-  //     });
-  //     setSliderValue(effectsData.chrome.filter, effectsData.chrome.step);
-  //     break;
-
-  //   case effectsData.sepia.id:
-  //     preview.classList.add(effectsData.sepia.class);
-  //     break;
-
-  //   case effectsData.marvin.id:
-  //     preview.classList.add(effectsData.marvin.class);
-  //     break;
-
-  //   case effectsData.phobos.id:
-  //     preview.classList.add(effectsData.phobos.class);
-  //     break;
-
-  //   case effectsData.heat.id:
-  //     preview.classList.add(effectsData.heat.class);
-  //     break;
-  // }
 }
 
 effectsList.addEventListener('change', onEffectsListChange);
 
 function onEffectsListChange (evt) {
-  setEffect(evt.target.value);
+  setEffect(evt);
 }
 
 export {setSlider, removeSlider}
