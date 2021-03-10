@@ -69,13 +69,6 @@ function removeSlider () {
   effectLevelInput.value = '';
 }
 
-function setSliderValue (filter, units) {
-  slider.noUiSlider.on('update', (values, handle) => {
-    effectLevelInput.value = values[handle];
-    preview.style.filter = `${filter}(${effectLevelInput.value}${units})`;
-  })
-}
-
 function setEffect (evt) {
   currentEffect = effectsData[evt.target.value];
 
