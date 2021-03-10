@@ -38,5 +38,3 @@ function onDocumentKeydown (evt) {
 }
 
 uploadInput.addEventListener('change', onUploadInputChange);
-
-export {editor}

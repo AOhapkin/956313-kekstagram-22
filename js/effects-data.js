@@ -1,8 +1,8 @@
 const effectsData = {
-  none: {
-    id: 'effect-none',
-    filter: '',
-  },
+  // none: {
+  //   id: 'effect-none',
+  //   filter: '',
+  // },
   chrome: {
     id: 'effect-chrome',
     class: 'effects__preview--chrome',
