@@ -1,4 +1,4 @@
-const effectsData = {
+const EffectsData = {
   chrome: {
     id: 'effect-chrome',
     class: 'effects__preview--chrome',
@@ -43,4 +43,4 @@ const effectsData = {
   },
 }
 
-export {effectsData}
+export {EffectsData}
