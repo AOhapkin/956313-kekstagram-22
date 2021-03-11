@@ -4,9 +4,11 @@ const editor = document.querySelector('.img-upload__overlay');
 const scalelUpButton = editor.querySelector('.scale__control--bigger');
 const scaleDownButton = editor.querySelector('.scale__control--smaller');
 const scaleInput = editor.querySelector('.scale__control--value');
-const scaleDefault = 100;
-const scaleStep = 25;
-let scale = scaleDefault;
+const SCALE_DEFAULT = 100;
+const SCALE_STEP = 25;
+const SCALE_MIN = 25;
+const SCALE_MAX = 100;
+let scale = SCALE_DEFAULT;
 const uploadForm = document.querySelector('.img-upload__form');
 const preview = uploadForm.querySelector('.img-upload__preview');
 const effectsList = uploadForm.querySelector('.effects__list');
@@ -15,24 +17,25 @@ const effectLevelInput = uploadForm.querySelector('.effect-level__value');
 const slider = uploadForm.querySelector('.effect-level__slider');
 let currentEffect = '';
 
-scaleInput.value = scale + '%';
-scalelUpButton.addEventListener('click', onScaleUpClick);
+function setScaleControls () {
+  scaleInput.value = scale + '%';
+  scalelUpButton.addEventListener('click', onScaleUpClick);
+  scaleDownButton.addEventListener('click', onScaleDownClick);
+}
 
 function onScaleUpClick () {
-  if (scale < 100) {
-    scale += scaleStep;
+  if (scale < SCALE_MAX) {
+    scale += SCALE_STEP;
     scaleInput.value = scale + '%';
-    preview.style.transform = 'scale(' + scale/100 + ')';
+    preview.style.transform = 'scale(' + scale/SCALE_MAX + ')';
   }
 }
 
-scaleDownButton.addEventListener('click', onScaleDownClick);
-
 function onScaleDownClick () {
-  if (scale > 25) {
-    scale -= scaleStep;
+  if (scale > SCALE_MIN) {
+    scale -= SCALE_STEP;
     scaleInput.value = scale + '%';
-    preview.style.transform = 'scale(' + scale/100 + ')';
+    preview.style.transform = 'scale(' + scale/SCALE_MAX + ')';
   }
 }
 
@@ -89,4 +92,4 @@ function onEffectsListChange (evt) {
   setEffect(evt);
 }
 
-export {setSlider, removeSlider}
+export {setSlider, removeSlider, setScaleControls}

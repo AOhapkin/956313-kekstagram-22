@@ -61,7 +61,7 @@ function showBigPicture (evt) {
 }
 
 function findBigPicture (evt) {
-  if (evt.target.className != 'picture__img') {
+  if (evt.target.className !== 'picture__img') {
     return;
   }
 

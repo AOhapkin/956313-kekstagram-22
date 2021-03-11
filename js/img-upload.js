@@ -1,6 +1,6 @@
 import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
-import {setSlider, removeSlider} from './editor.js';
+import {setScaleControls, setSlider, removeSlider} from './editor.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const editor = document.querySelector('.img-upload__overlay');
@@ -11,6 +11,7 @@ function showImageEditor () {
   body.classList.add('modal-open');
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
+  setScaleControls();
   setSlider();
 }
 
