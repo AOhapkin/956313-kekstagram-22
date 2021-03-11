@@ -67,7 +67,7 @@ function setSlider () {
 
 function removeSlider () {
   slider.noUiSlider.destroy();
-  preview.style.filter = effectsData.none.filter;
+  preview.style.filter = '';
   preview.className = 'img-upload__preview';
   effectLevelInput.value = '';
 }
