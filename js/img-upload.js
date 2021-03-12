@@ -20,11 +20,12 @@ function hideImageEditor () {
   body.classList.remove('modal-open');
   closeButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
+  uploadInput.value = '';
+  removeSlider();
 }
 
 function onCloseButtonClick () {
   hideImageEditor();
-  removeSlider();
 }
 
 function onUploadInputChange (evt) {
