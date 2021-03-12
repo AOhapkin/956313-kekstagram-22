@@ -63,10 +63,20 @@ function setSlider () {
     },
   });
   sliderBlock.classList.add('hidden');
-  slider.noUiSlider.on('update', function (values, handle) {
-    // inputs[handle].value = values[handle];
-    console.log(values);
-  });
+  effectsList.addEventListener('change', onEffectsListChange);
+  // slider.noUiSlider.on('update', function (values, handle) {
+  //   // inputs[handle].value = values[handle];
+  //   console.log(values);
+  // });
+}
+
+function onEffectsListChange (evt) {
+  clearEffect();
+  setEffect(evt);
+}
+
+function clearEffect () {
+  preview.className = 'img-upload__preview';
 }
 
 function removeSlider () {
@@ -78,22 +88,35 @@ function removeSlider () {
 
 function setEffect (evt) {
   currentEffect = EffectsData[evt.target.value];
-
   preview.className = 'img-upload__preview';
-  preview.classList.add('effects__preview--' + evt.target.value);
 
   if (!currentEffect) {
     effectLevelInput.value = '';
     sliderBlock.classList.add('hidden');
   } else {
     sliderBlock.classList.remove('hidden');
+    preview.classList.add(currentEffect.class);
+    slider.noUiSlider.updateOptions({
+      range: {
+        min: EffectsData[evt.target.value].min,
+        max: EffectsData[evt.target.value].max,
+      },
+      start: EffectsData[evt.target.value].start,
+      step: EffectsData[evt.target.value].step,
+    });
+    getSliderValue(EffectsData[evt.target.value].filter, EffectsData[evt.target.value].units);
   }
 }
 
-effectsList.addEventListener('change', onEffectsListChange);
-
-function onEffectsListChange (evt) {
-  setEffect(evt);
+function getSliderValue (filter, units) {
+  slider.noUiSlider.on('update', (values, handle) => {
+    effectLevelInput.value = values[handle];
+    if (units) {
+      preview.style.filter = `${filter}(${effectLevelInput.value}${units})`;
+    } else {
+      preview.style.filter = `${filter}(${effectLevelInput.value})`;
+    }
+  });
 }
 
 export {setSlider, removeSlider, setScaleControls}
