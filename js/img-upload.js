@@ -1,6 +1,7 @@
 import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
+import './hashtag-validation.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const editor = document.querySelector('.img-upload__overlay');
@@ -38,5 +39,8 @@ function onDocumentKeydown (evt) {
     hideImageEditor();
   }
 }
+
+// ВРЕМЕННО
+showImageEditor();
 
 uploadInput.addEventListener('change', onUploadInputChange);
