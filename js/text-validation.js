@@ -1,11 +1,14 @@
-import {isEscEvent} from './utils.js';
-
-const tagsInput = document.querySelector('.text__hashtags');
+const uploadForm = document.querySelector('.img-upload__form');
+const tagsInput = uploadForm.querySelector('.text__hashtags');
 const MAX_TAGS_NUMBER = 5;
 const MAX_TAGS_LENGTH = 20;
 const pattern = /[^a-zA-Z0-9]/;
+const description = uploadForm.querySelector('.text__description');
+const MAX_DESCRIPTION_LENGTH = 140;
 
-tagsInput.addEventListener('input', () => {
+tagsInput.addEventListener('input', onTagsInputInput);
+
+function onTagsInputInput () {
   const tags = tagsInput.value.split(' ');
   for (let i=0; i < tags.length; i++) {
     if (tags[i][0] !== '#') {
@@ -24,14 +27,6 @@ tagsInput.addEventListener('input', () => {
       tagsInput.setCustomValidity('');
     }
   }
-});
-
-tagsInput.addEventListener('keydown', onTagsInputKeydown);
-
-function onTagsInputKeydown (evt) {
-  if (isEscEvent(evt)) {
-    evt.preven
-  }
 }
 
 function hasDuplicates (array) {
@@ -46,6 +41,12 @@ function hasDuplicates (array) {
   return false;
 }
 
+description.addEventListener('input', onDescriptionInput);
 
-
-
+function onDescriptionInput () {
+  if (description.value.length > MAX_DESCRIPTION_LENGTH) {
+    description.setCustomValidity('Максимум ' + MAX_DESCRIPTION_LENGTH + ' знаков. Сделайте короче на ' + (description.value.length - MAX_DESCRIPTION_LENGTH) + '.');
+  } else {
+    description.setCustomValidity('');
+  }
+}

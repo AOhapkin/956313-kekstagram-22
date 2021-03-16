@@ -1,7 +1,7 @@
 import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
-import './hashtag-validation.js';
+import './text-validation.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
