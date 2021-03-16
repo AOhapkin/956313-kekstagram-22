@@ -3,9 +3,12 @@ import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
 import './hashtag-validation.js';
 
-const uploadInput = document.querySelector('#upload-file');
-const editor = document.querySelector('.img-upload__overlay');
+const uploadForm = document.querySelector('.img-upload__form');
+const uploadInput = uploadForm.querySelector('.img-upload__input');
+const editor = uploadForm.querySelector('.img-upload__overlay');
 const closeButton = editor.querySelector('.img-upload__cancel');
+const tagsInput = uploadForm.querySelector('.text__hashtags');
+const descriptionInput = uploadForm.querySelector('.text__description');
 
 function showImageEditor () {
   editor.classList.remove('hidden');
@@ -35,7 +38,7 @@ function onUploadInputChange (evt) {
 }
 
 function onDocumentKeydown (evt) {
-  if (isEscEvent(evt)) {
+  if (isEscEvent(evt) && document.activeElement !== tagsInput && document.activeElement !== descriptionInput) {
     hideImageEditor();
   }
 }

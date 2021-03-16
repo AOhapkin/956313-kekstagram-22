@@ -1,3 +1,5 @@
+import {isEscEvent} from './utils.js';
+
 const tagsInput = document.querySelector('.text__hashtags');
 const MAX_TAGS_NUMBER = 5;
 const MAX_TAGS_LENGTH = 20;
@@ -23,6 +25,14 @@ tagsInput.addEventListener('input', () => {
     }
   }
 });
+
+tagsInput.addEventListener('keydown', onTagsInputKeydown);
+
+function onTagsInputKeydown (evt) {
+  if (isEscEvent(evt)) {
+    evt.preven
+  }
+}
 
 function hasDuplicates (array) {
   let valuesSoFar = Object.create(null);
