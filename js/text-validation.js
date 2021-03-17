@@ -2,7 +2,7 @@ const uploadForm = document.querySelector('.img-upload__form');
 const tagsInput = uploadForm.querySelector('.text__hashtags');
 const MAX_TAGS_NUMBER = 5;
 const MAX_TAGS_LENGTH = 20;
-const pattern = /[^a-zA-Z0-9]/;
+const pattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,19}$/i;
 const description = uploadForm.querySelector('.text__description');
 const MAX_DESCRIPTION_LENGTH = 140;
 
@@ -11,7 +11,7 @@ tagsInput.addEventListener('input', onTagsInputInput);
 function onTagsInputInput () {
   const tags = tagsInput.value.split(' ');
   for (let i=0; i < tags.length; i++) {
-    if (tags[i][0] !== '#') {
+    if (tags[i][0] !== '#' && tags.length !== 0) {
       tagsInput.setCustomValidity('Теги должны начинаться с #')
     } else if (tags.length > MAX_TAGS_NUMBER) {
       tagsInput.setCustomValidity('Максимальное число тегов: ' + MAX_TAGS_NUMBER);
