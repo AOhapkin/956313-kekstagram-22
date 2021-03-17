@@ -14,4 +14,16 @@ function isEscEvent (evt) {
   return evt.key === ('Escape' || 'Esc');
 }
 
-export {getRandomFromRange, getRandomArrayElement, isEscEvent};
+function hasDuplicates (array) {
+  let valuesSoFar = {};
+  for (let i = 0; i < array.length; ++i) {
+    let value = array[i].toLowerCase();
+    if (value in valuesSoFar) {
+      return true;
+    }
+    valuesSoFar[value] = true;
+  }
+  return false;
+}
+
+export {getRandomFromRange, getRandomArrayElement, isEscEvent, hasDuplicates};

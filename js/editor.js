@@ -1,7 +1,7 @@
 import {EffectsData} from './effects-data.js'
 
 const editor = document.querySelector('.img-upload__overlay');
-const scalelUpButton = editor.querySelector('.scale__control--bigger');
+const scaleUpButton = editor.querySelector('.scale__control--bigger');
 const scaleDownButton = editor.querySelector('.scale__control--smaller');
 const scaleInput = editor.querySelector('.scale__control--value');
 const SCALE_DEFAULT = 100;
@@ -19,7 +19,7 @@ let currentEffect = '';
 
 function setScaleControls () {
   scaleInput.value = SCALE_DEFAULT + '%';
-  scalelUpButton.addEventListener('click', onScaleUpClick);
+  scaleUpButton.addEventListener('click', onScaleUpClick);
   scaleDownButton.addEventListener('click', onScaleDownClick);
 }
 
@@ -64,10 +64,6 @@ function setSlider () {
   });
   sliderBlock.classList.add('hidden');
   effectsList.addEventListener('change', onEffectsListChange);
-  // slider.noUiSlider.on('update', function (values, handle) {
-  //   // inputs[handle].value = values[handle];
-  //   console.log(values);
-  // });
 }
 
 function onEffectsListChange (evt) {

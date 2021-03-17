@@ -1,7 +1,7 @@
 import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
-import './text-validation.js';
+import {onTagsInputInput, onDescriptionInput} from './text-validation.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
@@ -15,6 +15,8 @@ function showImageEditor () {
   body.classList.add('modal-open');
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
+  descriptionInput.addEventListener('input', onDescriptionInput);
+  tagsInput.addEventListener('input', onTagsInputInput);
   setScaleControls();
   setSlider();
 }
@@ -32,8 +34,7 @@ function onCloseButtonClick () {
   hideImageEditor();
 }
 
-function onUploadInputChange (evt) {
-  evt.preventDefault();
+function onUploadInputChange () {
   showImageEditor();
 }
 
@@ -42,8 +43,5 @@ function onDocumentKeydown (evt) {
     hideImageEditor();
   }
 }
-
-// ВРЕМЕННО
-showImageEditor();
 
 uploadInput.addEventListener('change', onUploadInputChange);
