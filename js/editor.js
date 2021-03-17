@@ -4,17 +4,17 @@ const editor = document.querySelector('.img-upload__overlay');
 const scaleUpButton = editor.querySelector('.scale__control--bigger');
 const scaleDownButton = editor.querySelector('.scale__control--smaller');
 const scaleInput = editor.querySelector('.scale__control--value');
-const SCALE_DEFAULT = 100;
-const SCALE_STEP = 25;
-const SCALE_MIN = 25;
-const SCALE_MAX = 100;
-let scale = SCALE_DEFAULT;
 const uploadForm = document.querySelector('.img-upload__form');
 const preview = uploadForm.querySelector('.img-upload__preview');
 const effectsList = uploadForm.querySelector('.effects__list');
 const sliderBlock = uploadForm.querySelector('.img-upload__effect-level');
 const effectLevelInput = uploadForm.querySelector('.effect-level__value');
 const slider = uploadForm.querySelector('.effect-level__slider');
+const SCALE_DEFAULT = 100;
+const SCALE_STEP = 25;
+const SCALE_MIN = 25;
+const SCALE_MAX = 100;
+let scale = SCALE_DEFAULT;
 let currentEffect = '';
 
 function setScaleControls () {
