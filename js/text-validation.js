@@ -3,7 +3,7 @@ import {hasDuplicates} from './utils.js';
 const uploadForm = document.querySelector('.img-upload__form');
 const tagsInput = uploadForm.querySelector('.text__hashtags');
 const description = uploadForm.querySelector('.text__description');
-const pattern = /^#(?=.*[^0-9])[a-zа-яё0-9]{1,19}$/i;
+const pattern = /[^A-Za-z0-9]+/;
 const MAX_TAGS_NUMBER = 5;
 const MAX_TAGS_LENGTH = 20;
 const MAX_DESCRIPTION_LENGTH = 140;
@@ -27,6 +27,7 @@ function onTagsInputInput () {
       tagsInput.setCustomValidity('');
     }
   }
+  tagsInput.reportValidity();
 }
 
 function onDescriptionInput () {
