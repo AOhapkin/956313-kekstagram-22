@@ -11,8 +11,8 @@ const MAX_DESCRIPTION_LENGTH = 140;
 function onTagsInputInput () {
   const tags = tagsInput.value.split(' ');
   for (let i=0; i < tags.length; i++) {
-    if (tags[i][0] !== '#' && tags.length !== 0) {
-      tagsInput.setCustomValidity('Теги должны начинаться с #')
+    if (tags[i] !== '' && tags[i][0] !== '#') {
+      tagsInput.setCustomValidity('Теги должны начинаться с #');
     } else if (tags.length > MAX_TAGS_NUMBER) {
       tagsInput.setCustomValidity('Максимальное число тегов: ' + MAX_TAGS_NUMBER);
     } else if (pattern.test(tags[i].slice(1))) {
