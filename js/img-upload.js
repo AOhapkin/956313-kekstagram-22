@@ -1,7 +1,7 @@
 import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
-import {onTagsInputInput, onDescriptionInput} from './text-validation.js';
+import {onTagsInput, onDescriptionInput} from './text-validation.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
@@ -16,7 +16,7 @@ function showImageEditor () {
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
   descriptionInput.addEventListener('input', onDescriptionInput);
-  tagsInput.addEventListener('input', onTagsInputInput);
+  tagsInput.addEventListener('input', onTagsInput);
   setScaleControls();
   setSlider();
 }
