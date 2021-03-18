@@ -29,7 +29,7 @@ function validateTag (tag) {
   } else if (tag.length === 1) {
     return 'Тег не может быть пустым';
   } else if (!tag.slice(1).match(pattern)) {
-    return 'Теги должны состоять только из букв и числел';
+    return 'Теги должны состоять только из букв и чисел';
   } else if (tag.length > MAX_TAGS_LENGTH) {
     return 'Слишком длинный тег. Максимум символов: ' + MAX_TAGS_LENGTH;
   }
