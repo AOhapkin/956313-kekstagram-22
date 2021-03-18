@@ -8,15 +8,11 @@ const MAX_TAGS_NUMBER = 5;
 const MAX_TAGS_LENGTH = 20;
 const MAX_DESCRIPTION_LENGTH = 140;
 
-
-
 function onTagsInput () {
   const tagsString = tags.value;
   const tagsArray = tagsString.split(' ').map(tag => tag.toLowerCase());
 
   const message = validateTags(tagsArray);
-
-  console.log(message);
 
   if (message) {
     tags.setCustomValidity(message);
@@ -25,35 +21,15 @@ function onTagsInput () {
   }
 
   tags.reportValidity();
-
-
-  // for (let i=0; i < tagsText.length; i++) {
-  //   if (tagsText[i] !== '' && tagsText[i][0] !== '#') {
-  //     tags.setCustomValidity('Теги должны начинаться с #');
-  //   } else if (tagsText.length > MAX_TAGS_NUMBER) {
-  //     tags.setCustomValidity('Максимальное число тегов: ' + MAX_TAGS_NUMBER);
-  //   } else if (pattern.test(tagsText[i].slice(1))) {
-  //     tags.setCustomValidity('Теги должны состоять только из букв и числел');
-  //   } else if (tagsText[i].length > MAX_TAGS_LENGTH) {
-  //     tags.setCustomValidity('Слишком длинный тег. Максимум символов: ' + MAX_TAGS_LENGTH);
-  //   } else if (tagsText[i].length === 1) {
-  //     tags.setCustomValidity('Тег не может быть пустым');
-  //   } else if (hasDuplicates(tagsText)) {
-  //     tags.setCustomValidity('Удалите повторяющиеся теги');
-  //   } else {
-  //     tags.setCustomValidity('');
-  //   }
-  // }
-  // tags.reportValidity();
 }
 
 function validateTag (tag) {
   if (tag[0] !== '#') {
     return 'Теги должны начинаться с #';
-  } else if (!tag.slice(1).match(pattern)) {
-    return 'Теги должны состоять только из букв и числел';
   } else if (tag.length === 1) {
     return 'Тег не может быть пустым';
+  } else if (!tag.slice(1).match(pattern)) {
+    return 'Теги должны состоять только из букв и числел';
   } else if (tag.length > MAX_TAGS_LENGTH) {
     return 'Слишком длинный тег. Максимум символов: ' + MAX_TAGS_LENGTH;
   }
