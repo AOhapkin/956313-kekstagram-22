@@ -7,7 +7,7 @@ const errorText = downloadErrorMessage.querySelector('.error__title');
 const MESSAGE_TIME = 4000;
 
 function getServerData () {
-  return fetch('https://22.javascript.pages.academy/kekstagram/data')
+  return fetch('https://22.javascript.pages.academy/kekstagram/dta')
     .then(checkStatus)
     .then((response) => response.json())
     .catch(showDownloadError);
