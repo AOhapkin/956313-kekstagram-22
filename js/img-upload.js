@@ -1,4 +1,3 @@
-import {body} from './big-picture.js';
 import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
 import {onTagsInput, onDescriptionInput} from './text-validation.js';
@@ -12,7 +11,7 @@ const descriptionInput = uploadForm.querySelector('.text__description');
 
 function showImageEditor () {
   editor.classList.remove('hidden');
-  body.classList.add('modal-open');
+  document.body.classList.add('modal-open');
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
   descriptionInput.addEventListener('input', onDescriptionInput);
@@ -23,7 +22,7 @@ function showImageEditor () {
 
 function hideImageEditor () {
   editor.classList.add('hidden');
-  body.classList.remove('modal-open');
+  document.body.classList.remove('modal-open');
   closeButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
   uploadInput.value = '';
