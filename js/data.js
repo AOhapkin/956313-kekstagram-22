@@ -10,7 +10,7 @@ function getServerData () {
   return fetch('https://22.javascript.pages.academy/kekstagram/data')
     .then(checkStatus)
     .then((response) => response.json())
-    .catch(showDownloadError);
+    .catch(showError);
 }
 
 function checkStatus(response) {
@@ -21,13 +21,13 @@ function checkStatus(response) {
   const {statusText, status} = response;
 
   throw new Error(`${status} — ${statusText}`);
-  // todo алерт для юзера
+  // сообщение для пользователя
 }
 
-function showDownloadError () {
+function showError (statusText, status) {
   errorMessage.style.zIndex = '100';
   document.body.append(errorMessage);
-  errorText.textContent = 'Попробуйте позже! Попробуйте позже! Попробуйте позже!';
+  errorText.textContent = 'Попробуйте позже! <br>' + status + ' ' + statusText;
   errorCloseButton.textContent = 'Ок';
   errorCloseButton.addEventListener('click', onErrorCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);

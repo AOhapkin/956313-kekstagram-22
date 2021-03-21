@@ -1,6 +1,4 @@
 import {isEscEvent} from './utils.js';
-// import {picturesSection} from './pictures-preview.js';
-// import {picturesData} from './data.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('img');
@@ -54,30 +52,10 @@ function showBigPicture (data) {
   body.classList.add('modal-open');
   commentCountBlock.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  // let picture = findBigPicture(evt);
   renderBigPicture(data);
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 }
-
-// function findBigPicture (evt) {
-//   if (evt.target.className !== 'picture__img') {
-//     return;
-//   }
-
-//   const child = evt.target.parentNode;
-//   const childs = picturesSection.querySelectorAll('.picture');
-//   let childId;
-
-//   for (let i = 0; i < childs.length; i++) {
-//     if (child === childs[i]) {
-//       childId = i;
-//       break;
-//     }
-//   }
-
-//   return picturesData[childId];
-// }
 
 function onDocumentKeydown (evt) {
   if (isEscEvent(evt)) {

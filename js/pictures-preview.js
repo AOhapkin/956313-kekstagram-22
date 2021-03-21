@@ -22,13 +22,6 @@ function createPictures (pictures) {
     picturesSectionFragment.appendChild(createPictureElement(picture));
   });
   picturesSection.appendChild(picturesSectionFragment);
-  // picturesSection.addEventListener('click', onPictureElementClick);
 }
-
-// function onPictureElementClick (evt) {
-//   if (evt.target.classList.contains('picture__img')) {
-//     showBigPicture(evt);
-//   }
-// }
 
 export {createPictures};
