@@ -7,7 +7,7 @@ const errorText = errorMessage.querySelector('.error__title');
 const MESSAGE_TIME = 4000;
 
 function getServerData () {
-  return fetch('https://22.javascript.pages.academy/kekstagram/data')
+  return fetch('https://22.javascript.pages.academy/kekstagram/d5data')
     .then(checkStatus)
     .then((response) => response.json())
     .catch(showError);
@@ -19,22 +19,20 @@ function checkStatus(response) {
   }
 
   const {statusText, status} = response;
-
-  throw new Error(`${status} — ${statusText}`);
-  // сообщение для пользователя
+  showError(statusText, status);
 }
 
 function showError (statusText, status) {
   errorMessage.style.zIndex = '100';
   document.body.append(errorMessage);
-  errorText.textContent = 'Попробуйте позже! <br>' + status + ' ' + statusText;
+  errorText.textContent = status + ' ' + statusText;
   errorCloseButton.textContent = 'Ок';
   errorCloseButton.addEventListener('click', onErrorCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 
-  setTimeout(() => {
-    hideDownloadError();
-  }, MESSAGE_TIME);
+  // setTimeout(() => {
+  //   hideDownloadError();
+  // }, MESSAGE_TIME);
 }
 
 function onErrorCloseButtonClick () {
