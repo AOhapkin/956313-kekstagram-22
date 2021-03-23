@@ -1,9 +1,4 @@
-import {isEscEvent} from './utils.js';
-
-const errorTemplate = document.querySelector('#error').content;
-const errorMessage = errorTemplate.querySelector('.error').cloneNode(true);
-const errorCloseButton = errorMessage.querySelector('.error__button');
-const MESSAGE_TIME = 4000;
+import {showError} from './utils.js';
 
 function getData () {
   return fetch('https://22.javascript.pages.academy/kekstagram/data')
@@ -17,43 +12,6 @@ function checkStatus(response) {
   }
 
   showError('Не удалось получить данные. Попробуйте позже.');
-}
-
-function showError (message) {
-  const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.right = 0;
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '20px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
-
-  alertContainer.textContent = message;
-
-  document.body.append(alertContainer);
-
-  setTimeout(() => {
-    alertContainer.remove();
-  }, MESSAGE_TIME);
-}
-
-function onErrorCloseButtonClick () {
-  hideDownloadError();
-}
-
-function onDocumentKeydown (evt) {
-  if (isEscEvent(evt)) {
-    hideDownloadError();
-  }
-}
-
-function hideDownloadError () {
-  errorCloseButton.removeEventListener('click', onErrorCloseButtonClick);
-  document.removeEventListener('keydown', onDocumentKeydown);
-  document.body.removeChild(errorMessage);
 }
 
 function sendData (data) {
