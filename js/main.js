@@ -1,7 +1,7 @@
-import {getServerData} from './data.js';
+import {getData} from './api.js';
 import {createPictures} from './pictures-preview.js';
 import './img-upload.js';
 import './editor.js';
 
-getServerData()
+getData()
   .then((pictures) => createPictures(pictures));

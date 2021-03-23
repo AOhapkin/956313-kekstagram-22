@@ -6,8 +6,8 @@ const errorCloseButton = errorMessage.querySelector('.error__button');
 const errorText = errorMessage.querySelector('.error__title');
 const MESSAGE_TIME = 4000;
 
-function getServerData () {
-  return fetch('https://22.javascript.pages.academy/kekstagram/d5data')
+function getData () {
+  return fetch('https://22.javascript.pages.academy/kekstagram/data')
     .then(checkStatus)
     .then((response) => response.json())
     .catch(showError);
@@ -30,9 +30,9 @@ function showError (statusText, status) {
   errorCloseButton.addEventListener('click', onErrorCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 
-  // setTimeout(() => {
-  //   hideDownloadError();
-  // }, MESSAGE_TIME);
+  setTimeout(() => {
+    hideDownloadError();
+  }, MESSAGE_TIME);
 }
 
 function onErrorCloseButtonClick () {
@@ -51,4 +51,22 @@ function hideDownloadError () {
   document.body.removeChild(errorMessage);
 }
 
-export {getServerData}
+function onUploadFormSubmit (evt) {
+  evt.preventDefault();
+  sendData();
+}
+
+function sendData (data) {
+  return fetch('https://22.javascript.pages.academy/kekstagram', {
+    method: 'POST',
+    body: data,
+  })
+    .then((response) => {
+      if(!response.ok) {
+        const {statusText, status} = response;
+        showError(statusText, status);
+      }
+    });
+}
+
+export {getData, onUploadFormSubmit}
