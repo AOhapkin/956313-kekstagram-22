@@ -1,7 +1,7 @@
 import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
 import {onTagsInput, onDescriptionInput} from './text-validation.js';
-import {onUploadFormSubmit} from './api.js';
+import {sendData} from './api.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
@@ -47,3 +47,11 @@ function onDocumentKeydown (evt) {
 }
 
 uploadInput.addEventListener('change', onUploadInputChange);
+
+function onUploadFormSubmit (evt) {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+  
+  sendData();
+}

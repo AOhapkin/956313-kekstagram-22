@@ -3,7 +3,6 @@ import {isEscEvent} from './utils.js';
 const errorTemplate = document.querySelector('#error').content;
 const errorMessage = errorTemplate.querySelector('.error').cloneNode(true);
 const errorCloseButton = errorMessage.querySelector('.error__button');
-// const errorText = errorMessage.querySelector('.error__title');
 const MESSAGE_TIME = 4000;
 
 function getData () {
@@ -57,11 +56,6 @@ function hideDownloadError () {
   document.body.removeChild(errorMessage);
 }
 
-function onUploadFormSubmit (evt) {
-  evt.preventDefault();
-  sendData();
-}
-
 function sendData (data) {
   return fetch('https://22.javascript.pages.academy/kekstagram', {
     method: 'POST',
@@ -69,10 +63,9 @@ function sendData (data) {
   })
     .then((response) => {
       if(!response.ok) {
-        const {statusText, status} = response;
-        showError(statusText, status);
+        showError('Не удалось отправить данные. Попробуйте позже.');
       }
     });
 }
 
-export {getData, onUploadFormSubmit}
+export {getData, sendData}
