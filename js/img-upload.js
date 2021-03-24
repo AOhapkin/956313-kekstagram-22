@@ -2,6 +2,7 @@ import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
 import {onTagsInput, onDescriptionInput} from './text-validation.js';
 import {sendData} from './api.js';
+import {showSuccessMessage} from './upload-messages.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
@@ -52,6 +53,10 @@ function onUploadFormSubmit (evt) {
   evt.preventDefault();
 
   const formData = new FormData(evt.target);
-  
-  sendData();
+
+  sendData(formData)
+    .then(() => {
+      hideImageEditor();
+      showSuccessMessage();
+    })
 }
