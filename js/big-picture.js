@@ -1,6 +1,4 @@
 import {isEscEvent} from './utils.js';
-import {picturesSection} from './pictures-preview.js';
-import {data} from './random-data.js';
 
 const bigPicture = document.querySelector('.big-picture');
 const image = bigPicture.querySelector('img');
@@ -49,34 +47,14 @@ function renderBigPicture (picture) {
   }
 }
 
-function showBigPicture (evt) {
+function showBigPicture (data) {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
   commentCountBlock.classList.add('hidden');
   commentsLoader.classList.add('hidden');
-  let picture = findBigPicture(evt);
-  renderBigPicture(picture);
+  renderBigPicture(data);
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
-}
-
-function findBigPicture (evt) {
-  if (evt.target.className !== 'picture__img') {
-    return;
-  }
-
-  const child = evt.target.parentNode;
-  const childs = picturesSection.querySelectorAll('.picture');
-  let childId;
-
-  for (let i = 0; i < childs.length; i++) {
-    if (child === childs[i]) {
-      childId = i;
-      break;
-    }
-  }
-
-  return data[childId];
 }
 
 function onDocumentKeydown (evt) {

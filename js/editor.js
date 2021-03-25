@@ -27,7 +27,7 @@ function onScaleUpClick () {
   if (scale < SCALE_MAX) {
     scale += SCALE_STEP;
     scaleInput.value = scale + '%';
-    preview.style.transform = 'scale(' + scale/SCALE_MAX + ')';
+    preview.style.transform = `scale(${scale/SCALE_MAX})`;
   }
 }
 
@@ -35,7 +35,7 @@ function onScaleDownClick () {
   if (scale > SCALE_MIN) {
     scale -= SCALE_STEP;
     scaleInput.value = scale + '%';
-    preview.style.transform = 'scale(' + scale/SCALE_MAX + ')';
+    preview.style.transform = `scale(${scale/SCALE_MAX})`;
   }
 }
 

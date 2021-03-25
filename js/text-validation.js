@@ -53,11 +53,14 @@ function validateTags (tags) {
 }
 
 function onDescriptionInput () {
-  if (description.value.length > MAX_DESCRIPTION_LENGTH) {
-    description.setCustomValidity('Максимум ' + MAX_DESCRIPTION_LENGTH + ' знаков. Сделайте короче на ' + (description.value.length - MAX_DESCRIPTION_LENGTH) + '.');
+  const descriptionText = description.value;
+
+  if (descriptionText.length > MAX_DESCRIPTION_LENGTH) {
+    description.setCustomValidity(`Максимум ${MAX_DESCRIPTION_LENGTH} знаков. Сделайте короче на ${(descriptionText.length - MAX_DESCRIPTION_LENGTH)}.`);
   } else {
     description.setCustomValidity('');
   }
+  description.reportValidity();
 }
 
 export {onTagsInput, onDescriptionInput}
