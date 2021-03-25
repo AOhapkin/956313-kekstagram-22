@@ -1,23 +1,35 @@
 import {showError} from './utils.js';
-import {showErrorMessage} from './upload-messages.js';
 
 const API_URL = 'https://22.javascript.pages.academy/kekstagram';
 
-function getData () {
+function getData (onSuccess) {
   return fetch(`${API_URL}/data`)
+    .then((response) => response.json())
+    .then((pictures) => {
+      onSuccess(pictures);
+    })
     .catch(() => {
       showError('Не удалось получить данные. Попробуйте позже.');
-    })
-    .then((response) => response.json());
+    });
 }
 
-function sendData (data) {
-  return fetch(API_URL, {
-    method: 'POST',
-    body: data,
-  })
+function sendData (onSuccess, onError, data) {
+  fetch(
+    API_URL,
+    {
+      method: 'POST',
+      data,
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onError();
+      }
+    })
     .catch(() => {
-      showErrorMessage();
+      onError();
     });
 }
 

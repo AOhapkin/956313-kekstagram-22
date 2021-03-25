@@ -2,7 +2,7 @@ import {isEscEvent} from './utils.js';
 import {setScaleControls, setSlider, removeSlider} from './editor.js';
 import {onTagsInput, onDescriptionInput} from './text-validation.js';
 import {sendData} from './api.js';
-import {showSuccessMessage} from './upload-messages.js';
+import {showUploadErrorMessage} from './upload-messages.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const uploadInput = uploadForm.querySelector('.img-upload__input');
@@ -18,7 +18,6 @@ function showImageEditor () {
   document.addEventListener('keydown', onDocumentKeydown);
   descriptionInput.addEventListener('input', onDescriptionInput);
   tagsInput.addEventListener('input', onTagsInput);
-  uploadForm.addEventListener('submit', onUploadFormSubmit);
   setScaleControls();
   setSlider();
 }
@@ -28,7 +27,6 @@ function hideImageEditor () {
   document.body.classList.remove('modal-open');
   closeButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
-  uploadForm.removeEventListener('submit', onUploadFormSubmit);
   uploadInput.value = '';
   removeSlider();
 }
@@ -49,14 +47,18 @@ function onDocumentKeydown (evt) {
 
 uploadInput.addEventListener('change', onUploadInputChange);
 
-function onUploadFormSubmit (evt) {
-  evt.preventDefault();
+function setUserFormSubmit (onSuccess) {
+  uploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
 
-  const formData = new FormData(evt.target);
+    sendData(
+      onSuccess(),
+      showUploadErrorMessage(),
+      new FormData(evt.target),
+    );
 
-  sendData(formData)
-    .then(() => {
-      hideImageEditor();
-      showSuccessMessage();
-    })
+    hideImageEditor();
+  })
 }
+
+export {setUserFormSubmit}
