@@ -1,9 +1,11 @@
 import {showBigPicture} from './big-picture.js';
+import {updateFilter} from './pictures-filter.js';
 
 const picturesSection = document.querySelector('.pictures');
 const pictureTemplate =document.querySelector('#picture')
   .content
   .querySelector('.picture');
+const filter = document.querySelector('.img-filters');
 
 function createPictureElement (element) {
   const picture = pictureTemplate.cloneNode(true);
@@ -24,6 +26,8 @@ function createPictures (pictures) {
   });
 
   picturesSection.appendChild(picturesSectionFragment);
+  filter.classList.remove('img-filters--inactive');
+  filter.addEventListener('click', onFilterClick);
 
   picturesSection.addEventListener('click', (evt) => {
     if (evt.target.closest('.picture')) {
@@ -31,6 +35,10 @@ function createPictures (pictures) {
       showBigPicture(findElementById(id, pictures));
     }
   });
+}
+
+function onFilterClick (evt) {
+  updateFilter(evt);
 }
 
 function findElementById (id, array) {
