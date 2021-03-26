@@ -25,8 +25,17 @@ function showUploadSuccessMessage () {
     document.removeEventListener('keydown', onDocumentKeydown);
   }
 
+  function onDocumentClick (evt) {
+    if (evt.target.classname !== 'success') {
+      main.removeChild(successMessage);
+      document.removeEventListener('keydown', onDocumentKeydown);
+      main.removeEventListener('click', onDocumentClick)
+    }
+  }
+
   successButton.addEventListener('click', onButtonClick);
-  main.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
+  main.addEventListener('click', onDocumentClick);
 }
 
 function showUploadErrorMessage () {
@@ -46,8 +55,17 @@ function showUploadErrorMessage () {
     document.removeEventListener('keydown', onDocumentKeydown);
   }
 
+  function onDocumentClick (evt) {
+    if (evt.target.classname !== 'success') {
+      main.removeChild(errorMessage);
+      document.removeEventListener('keydown', onDocumentKeydown);
+      main.removeEventListener('click', onDocumentClick)
+    }
+  }
+
   errorButton.addEventListener('click', onButtonClick);
-  main.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
+  main.addEventListener('click', onDocumentClick);
 }
 
 export {showUploadSuccessMessage, showUploadErrorMessage}

@@ -1,9 +1,15 @@
 import {getData} from './api.js';
 import {createPictures} from './pictures-preview.js';
+import './img-upload.js';
 import {showError} from './utils.js';
-import {setUserFormSubmit} from './img-upload.js';
-import {showUploadSuccessMessage} from './upload-messages.js';
 import './editor.js';
 
-getData(createPictures, showError);
-setUserFormSubmit(showUploadSuccessMessage);
+function onDataSuccess (pictures) {
+  createPictures(pictures);
+}
+
+function onDataFail () {
+  showError();
+}
+
+getData(onDataSuccess, onDataFail);
