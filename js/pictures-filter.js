@@ -1,7 +1,11 @@
+const filter = document.querySelector('.img-filters');
+const filterButtons = filter.querySelectorAll('.img-filters__button');
+
 function updateFilter (evt) {
-  if (evt.target.classList.contains('img-filters__button')) {
-    console.log('filter button');
-  }
+  filterButtons.forEach((button) => {
+    button.classList.remove('img-filters__button--active');
+  })
+  evt.target.classList.add('img-filters__button--active');
 }
 
 export {updateFilter}
