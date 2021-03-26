@@ -1,15 +1,13 @@
-import {showError} from './utils.js';
-
 const API_URL = 'https://22.javascript.pages.academy/kekstagram';
 
-function getData (onSuccess) {
+function getData (onSuccess, onError) {
   return fetch(`${API_URL}/data`)
     .then((response) => response.json())
     .then((pictures) => {
       onSuccess(pictures);
     })
     .catch(() => {
-      showError('Не удалось получить данные. Попробуйте позже.');
+      onError();
     });
 }
 
@@ -18,7 +16,7 @@ function sendData (onSuccess, onError, data) {
     API_URL,
     {
       method: 'POST',
-      data,
+      body: data,
     },
   )
     .then((response) => {
