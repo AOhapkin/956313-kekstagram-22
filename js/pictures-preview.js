@@ -1,11 +1,16 @@
 import {showBigPicture} from './big-picture.js';
-import {updateFilter} from './pictures-filter.js';
+import {setFilterDefault, setFilterRandom, setFilterDiscussed} from './pictures-filter.js';
 
 const picturesSection = document.querySelector('.pictures');
 const pictureTemplate =document.querySelector('#picture')
   .content
   .querySelector('.picture');
 const filter = document.querySelector('.img-filters');
+const filterButtons = filter.querySelectorAll('.img-filters__button');
+const FILTER_ACTIVE_CLASS = 'img-filters__button--active';
+const FILTER_DEFAULT = 'filter-default';
+const FILTER_RANDOM = 'filter-random';
+const FILTER_DISCUSSED = 'filter-discussed';
 
 function createPictureElement (element) {
   const picture = pictureTemplate.cloneNode(true);
@@ -26,8 +31,6 @@ function createPictures (pictures) {
   });
 
   picturesSection.appendChild(picturesSectionFragment);
-  filter.classList.remove('img-filters--inactive');
-  filter.addEventListener('click', onFilterClick);
 
   picturesSection.addEventListener('click', (evt) => {
     if (evt.target.closest('.picture')) {
@@ -37,12 +40,38 @@ function createPictures (pictures) {
   });
 }
 
-function onFilterClick (evt) {
-  updateFilter(evt);
+function renderFilteredPictures (pictures) {
+  filter.classList.remove('img-filters--inactive');
+  filter.addEventListener('click', (evt) => {
+    const activeFilter = evt.target;
+
+    if (!activeFilter.classList.contains('img-filters__button')) {
+      return;
+    }
+
+    filterButtons.forEach((button) => {
+      button.classList.remove(FILTER_ACTIVE_CLASS);
+    });
+
+    activeFilter.classList.add(FILTER_ACTIVE_CLASS);
+    setFilter(activeFilter.id, pictures);
+
+    createPictures(pictures);
+  });
+}
+
+function setFilter (filter, pictures) {
+  if (filter === FILTER_DEFAULT) {
+    setFilterDefault(pictures);
+  } else if (filter === FILTER_RANDOM) {
+    setFilterRandom(pictures);
+  } else if (filter === FILTER_DISCUSSED) {
+    setFilterDiscussed(pictures);
+  }
 }
 
 function findElementById (id, array) {
   return array.find(elem => elem.id == id);
 }
 
-export {createPictures};
+export {renderFilteredPictures};
