@@ -1,4 +1,5 @@
 const MESSAGE_TIME = 4000;
+const ERROR_MESSAGE ='Не удалось получить данные. Попробуйте позже.';
 
 function getRandomFromRange (min, max) {
   if (Number.isInteger(min) && Number.isInteger(max)) {
@@ -28,7 +29,7 @@ function hasDuplicates (array) {
   return false;
 }
 
-function showError (message) {
+function showError () {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
   alertContainer.style.position = 'absolute';
@@ -40,7 +41,7 @@ function showError (message) {
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
 
-  alertContainer.textContent = message;
+  alertContainer.textContent = ERROR_MESSAGE;
 
   document.body.append(alertContainer);
 
@@ -49,4 +50,8 @@ function showError (message) {
   }, MESSAGE_TIME);
 }
 
-export {getRandomFromRange, getRandomArrayElement, isEscEvent, hasDuplicates, showError};
+function findElementById (id, array) {
+  return array.find(elem => elem.id == id);
+}
+
+export {getRandomFromRange, getRandomArrayElement, isEscEvent, hasDuplicates, showError, findElementById};
