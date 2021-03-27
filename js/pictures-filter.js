@@ -1,5 +1,3 @@
-import {getRandomFromRange} from './utils.js';
-
 const RANDOM_PHOTO_COUNT = 10;
 
 function setFilterDefault (pictures) {
@@ -7,14 +5,9 @@ function setFilterDefault (pictures) {
 }
 
 function setFilterRandom (pictures) {
-  let randomPictureIndex = getRandomFromRange(0, pictures.length -1);
-  let randomPictures = [];
+  let randomPictures = pictures.sort(() => Math.random() - 0.5);
 
-  for (let i = 0; i < RANDOM_PHOTO_COUNT; i++) {
-    randomPictures.push(pictures[randomPictureIndex]);
-  }
-
-  return randomPictures;
+  return randomPictures.slice(0, RANDOM_PHOTO_COUNT);
 }
 
 function setFilterDiscussed (pictures) {

@@ -1,16 +1,22 @@
+/* global _:readonly */
 import {showBigPicture} from './big-picture.js';
 import {setFilterDefault, setFilterRandom, setFilterDiscussed} from './pictures-filter.js';
+import {findElementById} from './utils.js';
 
 const picturesSection = document.querySelector('.pictures');
 const pictureTemplate =document.querySelector('#picture')
   .content
   .querySelector('.picture');
-const filter = document.querySelector('.img-filters');
-const filterButtons = filter.querySelectorAll('.img-filters__button');
+const filtersBlock = document.querySelector('.img-filters');
+const filterButtons = filtersBlock.querySelectorAll('.img-filters__button');
+const RENDER_TIME_OUT = 500;
 const FILTER_ACTIVE_CLASS = 'img-filters__button--active';
-const FILTER_DEFAULT = 'filter-default';
-const FILTER_RANDOM = 'filter-random';
-const FILTER_DISCUSSED = 'filter-discussed';
+
+const FILTERS = {
+  'filter-default': setFilterDefault,
+  'filter-random': setFilterRandom,
+  'filter-discussed': setFilterDiscussed,
+}
 
 function createPictureElement (element) {
   const picture = pictureTemplate.cloneNode(true);
@@ -40,9 +46,23 @@ function createPictures (pictures) {
   });
 }
 
+function deletePictures () {
+  let pics = picturesSection.querySelectorAll('.picture');
+  pics.forEach((pic) => {
+    picturesSection.removeChild(pic);
+  })
+}
+
 function renderFilteredPictures (pictures) {
-  filter.classList.remove('img-filters--inactive');
-  filter.addEventListener('click', (evt) => {
+  createPictures(pictures);
+  filtersBlock.classList.remove('img-filters--inactive');
+
+  filtersBlock.addEventListener('click', (evt) => {
+    const onFilterChange = _.debounce((id) => {
+      deletePictures();
+      createPictures(FILTERS[id](pictures));
+    }, RENDER_TIME_OUT);
+
     const activeFilter = evt.target;
 
     if (!activeFilter.classList.contains('img-filters__button')) {
@@ -54,24 +74,8 @@ function renderFilteredPictures (pictures) {
     });
 
     activeFilter.classList.add(FILTER_ACTIVE_CLASS);
-    setFilter(activeFilter.id, pictures);
-
-    createPictures(pictures);
+    onFilterChange(evt.target.id);
   });
-}
-
-function setFilter (filter, pictures) {
-  if (filter === FILTER_DEFAULT) {
-    setFilterDefault(pictures);
-  } else if (filter === FILTER_RANDOM) {
-    setFilterRandom(pictures);
-  } else if (filter === FILTER_DISCUSSED) {
-    setFilterDiscussed(pictures);
-  }
-}
-
-function findElementById (id, array) {
-  return array.find(elem => elem.id == id);
 }
 
 export {renderFilteredPictures};
