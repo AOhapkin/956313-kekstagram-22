@@ -5,7 +5,7 @@ function setFilterDefault (pictures) {
 }
 
 function setFilterRandom (pictures) {
-  let randomPictures = pictures.sort(() => Math.random() - 0.5);
+  let randomPictures = pictures.slice().sort(() => Math.random() - 0.5);
 
   return randomPictures.slice(0, RANDOM_PHOTO_COUNT);
 }

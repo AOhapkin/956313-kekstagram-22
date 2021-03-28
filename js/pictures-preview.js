@@ -18,13 +18,18 @@ const FILTERS = {
   'filter-discussed': setFilterDiscussed,
 }
 
-function createPictureElement (element) {
+function createPictureElement ({
+  url,
+  id,
+  comments,
+  likes,
+}) {
   const picture = pictureTemplate.cloneNode(true);
 
-  picture.querySelector('.picture__img').src = element.url;
-  picture.querySelector('.picture__comments').textContent = element.comments.length;
-  picture.querySelector('.picture__likes').textContent = element.likes;
-  picture.dataset.id = element.id;
+  picture.querySelector('.picture__img').src = url;
+  picture.querySelector('.picture__comments').textContent = comments.length;
+  picture.querySelector('.picture__likes').textContent = likes;
+  picture.dataset.id = id;
 
   return picture;
 }
@@ -53,29 +58,29 @@ function deletePictures () {
   })
 }
 
-function renderFilteredPictures (pictures) {
-  createPictures(pictures);
+function showFilters() {
   filtersBlock.classList.remove('img-filters--inactive');
-
-  filtersBlock.addEventListener('click', (evt) => {
-    const onFilterChange = _.debounce((id) => {
-      deletePictures();
-      createPictures(FILTERS[id](pictures));
-    }, RENDER_TIME_OUT);
-
-    const activeFilter = evt.target;
-
-    if (!activeFilter.classList.contains('img-filters__button')) {
-      return;
-    }
-
-    filterButtons.forEach((button) => {
-      button.classList.remove(FILTER_ACTIVE_CLASS);
-    });
-
-    activeFilter.classList.add(FILTER_ACTIVE_CLASS);
-    onFilterChange(evt.target.id);
-  });
 }
 
-export {renderFilteredPictures};
+function onFilterFormClick(evt, pictures) {
+  const activeFilter = evt.target;
+
+  if (!activeFilter.classList.contains('img-filters__button') || activeFilter.classList.contains(FILTER_ACTIVE_CLASS)) {
+    return;
+  }
+
+  filterButtons.forEach((button) => {
+    button.classList.remove(FILTER_ACTIVE_CLASS);
+  });
+
+  activeFilter.classList.add(FILTER_ACTIVE_CLASS);
+
+  deletePictures();
+  createPictures(FILTERS[evt.target.id](pictures));
+}
+
+function renderFilteredPictures (pictures) {
+  filtersBlock.addEventListener('click', _.debounce((evt) => onFilterFormClick(evt, pictures), RENDER_TIME_OUT));
+}
+
+export {createPictures, showFilters, renderFilteredPictures};
