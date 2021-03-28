@@ -14,8 +14,9 @@ const commentTemplate = document.querySelector('#comment')
   .content
   .querySelector('.social__comment');
 const closeButton = bigPicture.querySelector('.big-picture__cancel');
+
 const COMMENTS_MIN_NUMBER = 5;
-let maxCommentsOnDispayNumber = COMMENTS_MIN_NUMBER;
+let maxCommentsToDisplay = COMMENTS_MIN_NUMBER;
 let comments = [];
 
 function clearComments () {
@@ -37,7 +38,7 @@ function createComment ({
 }
 
 function onCommentsAddButtonClick() {
-  maxCommentsOnDispayNumber += COMMENTS_MIN_NUMBER;
+  maxCommentsToDisplay += COMMENTS_MIN_NUMBER;
   clearComments();
   createComments();
   setCommentCountBlock()
@@ -46,7 +47,7 @@ function onCommentsAddButtonClick() {
 function createComments () {
   clearComments();
   let fragment = document.createDocumentFragment();
-  comments.slice(0, maxCommentsOnDispayNumber).forEach(element => {
+  comments.slice(0, maxCommentsToDisplay).forEach(element => {
     fragment.appendChild(createComment(element))
   });
   commentsList.appendChild(fragment);
@@ -89,7 +90,7 @@ function showBigPicture (data) {
   body.classList.add('modal-open');
 
 
-  maxCommentsOnDispayNumber = COMMENTS_MIN_NUMBER;
+  maxCommentsToDisplay = COMMENTS_MIN_NUMBER;
   renderBigPicture(data);
   closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);

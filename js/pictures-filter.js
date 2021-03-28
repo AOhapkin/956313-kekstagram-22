@@ -1,7 +1,7 @@
 const RANDOM_PHOTO_COUNT = 10;
 
 function setFilterDefault (pictures) {
-  return pictures;
+  return pictures.sort((a, b) => a.id > b.id ? 1 : -1);
 }
 
 function setFilterRandom (pictures) {
