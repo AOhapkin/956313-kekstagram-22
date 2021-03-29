@@ -25,7 +25,7 @@ function onTagsInput () {
 }
 
 function validateTag (tag) {
-  if (tag.length == 0) {
+  if (tag.length === 0) {
     return;
   } else if (tag[0] !== '#') {
     return 'Теги должны начинаться с #';
