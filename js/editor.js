@@ -5,7 +5,7 @@ const scaleUpButton = editor.querySelector('.scale__control--bigger');
 const scaleDownButton = editor.querySelector('.scale__control--smaller');
 const scaleInput = editor.querySelector('.scale__control--value');
 const uploadForm = document.querySelector('.img-upload__form');
-const preview = uploadForm.querySelector('.img-upload__preview');
+const preview = uploadForm.querySelector('.img-upload__preview img');
 const effectsList = uploadForm.querySelector('.effects__list');
 const sliderBlock = uploadForm.querySelector('.img-upload__effect-level');
 const effectLevelInput = uploadForm.querySelector('.effect-level__value');
@@ -18,6 +18,14 @@ const SCALE_MAX = 100;
 
 let scale = SCALE_DEFAULT;
 let currentEffect = '';
+
+function resetScaleControls () {
+  scale = SCALE_DEFAULT;
+  scaleInput.value = SCALE_DEFAULT + '%';
+  preview.style.transform = `scale(${SCALE_DEFAULT/SCALE_MAX})`;
+  scaleUpButton.removeEventListener('click', onScaleUpClick);
+  scaleDownButton.removeEventListener('click', onScaleDownClick);
+}
 
 function setScaleControls () {
   scaleInput.value = SCALE_DEFAULT + '%';
@@ -112,7 +120,7 @@ function setEffect (evt) {
 function getSliderValue (filter, units) {
   slider.noUiSlider.on('update', (values, handle) => {
     effectLevelInput.value = values[handle];
-    
+
     if (units) {
       preview.style.filter = `${filter}(${effectLevelInput.value}${units})`;
     } else {
@@ -121,4 +129,4 @@ function getSliderValue (filter, units) {
   });
 }
 
-export {setSlider, removeSlider, setScaleControls}
+export {setSlider, removeSlider, setScaleControls, resetScaleControls}

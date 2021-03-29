@@ -4,7 +4,7 @@ const uploadForm = document.querySelector('.img-upload__form');
 const tags = uploadForm.querySelector('.text__hashtags');
 const description = uploadForm.querySelector('.text__description');
 
-const pattern = /^[0-9a-zA-Zа-яА-Я]+$/;
+const pattern = /^#[0-9a-zA-Zа-яА-Я]+$/;
 const MAX_TAGS_NUMBER = 5;
 const MAX_TAGS_LENGTH = 20;
 const MAX_DESCRIPTION_LENGTH = 140;
@@ -29,7 +29,7 @@ function validateTag (tag) {
     return 'Теги должны начинаться с #';
   } else if (tag.length === 1) {
     return 'Тег не может быть пустым';
-  } else if (!tag.slice(1).match(pattern)) {
+  } else if (!tag.match(pattern)) {
     return 'Теги должны состоять только из букв и чисел';
   } else if (tag.length > MAX_TAGS_LENGTH) {
     return 'Слишком длинный тег. Максимум символов: ' + MAX_TAGS_LENGTH;
