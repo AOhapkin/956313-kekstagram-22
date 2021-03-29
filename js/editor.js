@@ -10,10 +10,12 @@ const effectsList = uploadForm.querySelector('.effects__list');
 const sliderBlock = uploadForm.querySelector('.img-upload__effect-level');
 const effectLevelInput = uploadForm.querySelector('.effect-level__value');
 const slider = uploadForm.querySelector('.effect-level__slider');
+
 const SCALE_DEFAULT = 100;
 const SCALE_STEP = 25;
 const SCALE_MIN = 25;
 const SCALE_MAX = 100;
+
 let scale = SCALE_DEFAULT;
 let currentEffect = '';
 

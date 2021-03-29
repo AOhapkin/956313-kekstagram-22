@@ -20,9 +20,7 @@ let maxCommentsToDisplay = COMMENTS_MIN_NUMBER;
 let comments = [];
 
 function clearComments () {
-  while (commentsList.firstChild) {
-    commentsList.removeChild(commentsList.firstChild);
-  }
+  commentsList.innerHTML = '';
 }
 
 function createComment ({

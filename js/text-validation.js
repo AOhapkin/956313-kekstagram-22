@@ -3,6 +3,7 @@ import {hasDuplicates} from './utils.js';
 const uploadForm = document.querySelector('.img-upload__form');
 const tags = uploadForm.querySelector('.text__hashtags');
 const description = uploadForm.querySelector('.text__description');
+
 const pattern = /^[0-9a-zA-Zа-яА-Я]+$/;
 const MAX_TAGS_NUMBER = 5;
 const MAX_TAGS_LENGTH = 20;

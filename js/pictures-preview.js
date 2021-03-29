@@ -9,6 +9,7 @@ const pictureTemplate =document.querySelector('#picture')
   .querySelector('.picture');
 const filtersBlock = document.querySelector('.img-filters');
 const filterButtons = filtersBlock.querySelectorAll('.img-filters__button');
+
 const RENDER_TIME_OUT = 500;
 const FILTER_ACTIVE_CLASS = 'img-filters__button--active';
 
