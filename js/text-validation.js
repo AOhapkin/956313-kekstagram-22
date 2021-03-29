@@ -11,7 +11,7 @@ const MAX_DESCRIPTION_LENGTH = 140;
 
 function onTagsInput () {
   const tagsString = tags.value;
-  const tagsArray = tagsString.split(' ').map(tag => tag.toLowerCase());
+  const tagsArray = tagsString.trim().split(' ').map(tag => tag.toLowerCase());
 
   const message = validateTags(tagsArray);
 
@@ -25,7 +25,9 @@ function onTagsInput () {
 }
 
 function validateTag (tag) {
-  if (tag[0] !== '#') {
+  if (tag.length == 0) {
+    return;
+  } else if (tag[0] !== '#') {
     return 'Теги должны начинаться с #';
   } else if (tag.length === 1) {
     return 'Тег не может быть пустым';
