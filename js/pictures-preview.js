@@ -3,13 +3,6 @@ import {showBigPicture} from './big-picture.js';
 import {setFilterDefault, setFilterRandom, setFilterDiscussed} from './pictures-filter.js';
 import {findElementById} from './utils.js';
 
-const picturesSection = document.querySelector('.pictures');
-const pictureTemplate =document.querySelector('#picture')
-  .content
-  .querySelector('.picture');
-const filtersBlock = document.querySelector('.img-filters');
-const filterButtons = filtersBlock.querySelectorAll('.img-filters__button');
-
 const RENDER_TIME_OUT = 500;
 const FILTER_ACTIVE_CLASS = 'img-filters__button--active';
 
@@ -18,6 +11,13 @@ const FILTERS = {
   'filter-random': setFilterRandom,
   'filter-discussed': setFilterDiscussed,
 }
+
+const picturesSection = document.querySelector('.pictures');
+const pictureTemplate =document.querySelector('#picture')
+  .content
+  .querySelector('.picture');
+const filtersBlock = document.querySelector('.img-filters');
+const filterButtons = filtersBlock.querySelectorAll('.img-filters__button');
 
 function createPictureElement ({
   url,
@@ -54,7 +54,7 @@ function createPictures (pictures) {
 
 function deletePictures () {
   let pics = picturesSection.querySelectorAll('.picture');
-  
+
   pics.forEach((pic) => {
     picturesSection.removeChild(pic);
   })

@@ -1,5 +1,11 @@
 import {EffectsData} from './effects-data.js'
 
+const SCALE_DEFAULT = 100;
+const SCALE_STEP = 25;
+const SCALE_MIN = 25;
+const SCALE_MAX = 100;
+const PREVIEW_DEFAULT_CLASS = 'img-upload__preview';
+
 const editor = document.querySelector('.img-upload__overlay');
 const scaleUpButton = editor.querySelector('.scale__control--bigger');
 const scaleDownButton = editor.querySelector('.scale__control--smaller');
@@ -10,11 +16,6 @@ const effectsList = uploadForm.querySelector('.effects__list');
 const sliderBlock = uploadForm.querySelector('.img-upload__effect-level');
 const effectLevelInput = uploadForm.querySelector('.effect-level__value');
 const slider = uploadForm.querySelector('.effect-level__slider');
-
-const SCALE_DEFAULT = 100;
-const SCALE_STEP = 25;
-const SCALE_MIN = 25;
-const SCALE_MAX = 100;
 
 let scale = SCALE_DEFAULT;
 let currentEffect = '';
@@ -83,19 +84,19 @@ function onEffectsListChange (evt) {
 }
 
 function clearEffect () {
-  preview.className = 'img-upload__preview';
+  preview.className = PREVIEW_DEFAULT_CLASS;
 }
 
 function removeSlider () {
   slider.noUiSlider.destroy();
   preview.style.filter = '';
-  preview.className = 'img-upload__preview';
+  preview.className = PREVIEW_DEFAULT_CLASS;
   effectLevelInput.value = '';
 }
 
 function setEffect (evt) {
   currentEffect = EffectsData[evt.target.value];
-  preview.className = 'img-upload__preview';
+  preview.className = PREVIEW_DEFAULT_CLASS;
 
   if (!currentEffect) {
     effectLevelInput.value = '';

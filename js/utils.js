@@ -51,7 +51,7 @@ function showError () {
 }
 
 function findElementById (id, array) {
-  return array.find(elem => elem.id === id);
+  return array.find(elem => elem.id === +id);
 }
 
 export {getRandomFromRange, getRandomArrayElement, isEscEvent, hasDuplicates, showError, findElementById};
