@@ -54,6 +54,7 @@ function createPictures (pictures) {
 
 function deletePictures () {
   let pics = picturesSection.querySelectorAll('.picture');
+  
   pics.forEach((pic) => {
     picturesSection.removeChild(pic);
   })

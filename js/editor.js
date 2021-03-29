@@ -64,6 +64,7 @@ function setSlider () {
       },
     },
   });
+
   sliderBlock.classList.add('hidden');
   effectsList.addEventListener('change', onEffectsListChange);
 }
@@ -94,6 +95,7 @@ function setEffect (evt) {
   } else {
     sliderBlock.classList.remove('hidden');
     preview.classList.add(currentEffect.class);
+
     slider.noUiSlider.updateOptions({
       range: {
         min: EffectsData[evt.target.value].min,
@@ -102,6 +104,7 @@ function setEffect (evt) {
       start: EffectsData[evt.target.value].start,
       step: EffectsData[evt.target.value].step,
     });
+
     getSliderValue(EffectsData[evt.target.value].filter, EffectsData[evt.target.value].units);
   }
 }
@@ -109,6 +112,7 @@ function setEffect (evt) {
 function getSliderValue (filter, units) {
   slider.noUiSlider.on('update', (values, handle) => {
     effectLevelInput.value = values[handle];
+    
     if (units) {
       preview.style.filter = `${filter}(${effectLevelInput.value}${units})`;
     } else {

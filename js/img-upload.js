@@ -28,6 +28,8 @@ function hideImageEditor () {
   closeButton.removeEventListener('click', onCloseButtonClick);
   document.removeEventListener('keydown', onDocumentKeydown);
   uploadInput.value = '';
+  tagsInput.value = '';
+  descriptionInput.value = '';
   removeSlider();
 }
 
