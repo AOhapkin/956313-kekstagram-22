@@ -1,6 +1,6 @@
 import {isEscEvent} from './utils.js';
 import {setScaleControls, resetScaleControls, setSlider, removeSlider} from './editor.js';
-import {onTagsInput, onDescriptionInput} from './text-validation.js';
+import {onTagsInput, onDescriptionInput, resetValidation} from './text-validation.js';
 import {sendData} from './api.js';
 import {showUploadSuccessMessage, showUploadErrorMessage} from './upload-messages.js';
 
@@ -33,6 +33,7 @@ function hideImageEditor () {
   uploadForm.reset();
   removeSlider();
   resetScaleControls();
+  resetValidation();
 }
 
 function onCloseButtonClick () {

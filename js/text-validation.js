@@ -38,6 +38,11 @@ function validateTag (tag) {
   }
 }
 
+function resetValidation () {
+  tags.setCustomValidity('');
+  description.reportValidity('');
+}
+
 function validateTags (tags) {
   if (hasDuplicates(tags)) {
     return 'Удалите повторяющиеся теги';
@@ -66,4 +71,4 @@ function onDescriptionInput () {
   description.reportValidity();
 }
 
-export {onTagsInput, onDescriptionInput}
+export {onTagsInput, onDescriptionInput, resetValidation}
